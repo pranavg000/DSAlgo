@@ -5,35 +5,37 @@ using namespace std;
 
 int main(){
 
-vector<char> ca;
-vector<char> cb;
+// vector<char> ca;
+// vector<char> cb;
 
-char ch='1';
+string ca;
+string cb;
 
-while(ch!='\n')
-{
-	scanf("%c", &ch);
-	if(ch=='\n') break;
-	ca.push_back(ch);
-	//cout<<ch<<endl;
-}
-// cout<<ca.size()<<" ";
-ch='1';
-while(ch!='\n')
-{
-	scanf("%c", &ch);
-	if(ch=='\n') break;
-	cb.push_back(ch);
-}
 
-// for(int i=0;i<ca.size();i++)
+
+// char ch='1';
+
+// while(ch!='\n')
 // {
-// 	cout<<ca[i];
+// 	scanf("%c", &ch);
+// 	if(ch=='\n') break;
+// 	ca.push_back(ch);
+// 	//cout<<ch<<endl;
 // }
-// for(int i=0;i<cb.size();i++)
+// // cout<<ca.size()<<" ";
+// ch='1';
+// while(ch!='\n')
 // {
-// 	cout<<cb[i];
+// 	scanf("%c", &ch);
+// 	if(ch=='\n') break;
+// 	cb.push_back(ch);
 // }
+
+
+
+cin>>ca;
+cin>>cb;
+
 
 
 
@@ -89,7 +91,6 @@ for(int i=0;i<y;i++){
 	}
 	else {
 		ds = a[i]+b[i]+c;
-		//cout<<"$"<<" "<<ds<<endl;
 		if(ds<=9){
 			s[i]=ds;
 			c=0;
@@ -104,7 +105,6 @@ for(int i=0;i<y;i++){
 if(c!=0){
 	s[y]=c;
 }
-// cout<<c<<endl;
 if(c!=0)
 for(int i=s.size()-1;i>=0;i--){
 	cout<<s[i];

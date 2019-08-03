@@ -9,10 +9,7 @@ int comparetwo(string ca, string cb){
 
 int la = ca.size();
 int lb = cb.size();
-vector<int> a(la);
-vector<int> b(lb);
-int x = min(la,lb);
-int y= max(la,lb);
+
 int f=0;
 int ds;
 string ans;
@@ -154,13 +151,13 @@ return ans;
 
 string diff(string ca, string cb){
 
-
 int la = ca.size();
 int lb = cb.size();
-vector<int> a(la);
-vector<int> b(lb);
 int x = min(la,lb);
 int y= max(la,lb);
+vector<int> a(y,0);
+vector<int> b(x,0);
+
 int f=0;
 int ds;
 string ans;
