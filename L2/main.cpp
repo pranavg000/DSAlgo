@@ -63,13 +63,13 @@ int Length(){
 	return c;
 }
 
-vector<Node*> Search(float d){
+vector<Node*> Search(double d){
 	Node *t;
 	t = start;
 	vector<Node*> v;
 	while(t!=nullptr){
-		float dist = sqrt(t->x*t->x+t->y*t->y);
-		if(dist<=d){
+		// cout<<sqrt(((long long)t->x*t->x+(long long)t->y*t->y))<<endl;
+		if(sqrt(((long long)t->x*t->x+(long long)t->y*t->y))<=(d)){
 			v.push_back(t);
 		}
 		t = t->ptr;
@@ -155,7 +155,7 @@ int main(){
 				cin>>b;
 				v = Search(b);
 				for(int i=0;i<v.size();i++){
-					cout<<"("<<v[i]->x<<","<<v[i]->y<<")";
+					cout<<"("<<v[i]->x<<","<<v[i]->y<<")"<<" ";
 				}
 				cout<<endl;
 				break;
