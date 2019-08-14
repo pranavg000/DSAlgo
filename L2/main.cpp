@@ -100,16 +100,16 @@ int Del(int a, int b){
 	while(t!=nullptr){
 		
 		if(t->x==a&&t->y==b){
-			if(c==0||Length()==1){
+			if(c==0||Length()==1){ //If the found node is the first node.
 				DelFirst();
 			
 		}
-		else if(t->ptr==nullptr){
+		else if(t->ptr==nullptr){ //If the found node is the last node.
 			p = t;
 			prev = nullptr;
 			delete p;
 		}
-		else {
+		else {	//If the found node is in between.
 			p = t;
 			prev->ptr = p->ptr;
 			delete p;
