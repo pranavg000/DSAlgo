@@ -1,7 +1,7 @@
 # CS204 Lab
 
-## Pranav Gupta
-## 180101058
+### Pranav Gupta
+### 180101058
 
 
 ## L1 uploaded
