@@ -8,8 +8,8 @@ struct Node
 {
 	int x,y;
 
-	Node* ptr; 
-	
+	Node* ptr;
+
 };
 Node* start = nullptr;
 
@@ -63,26 +63,26 @@ int Length(){
 	return c;
 }
 
-vector<Node*> Search(double d){
+int Search(double d){
 	Node *t;
 	t = start;
-	vector<Node*> v;
+	int c=0;
 	while(t!=nullptr){
 		// cout<<sqrt(((long long)t->x*t->x+(long long)t->y*t->y))<<endl;
 		if(sqrt(((long long)t->x*t->x+(long long)t->y*t->y))<=(d)){
-			v.push_back(t);
+			c++;
 		}
 		t = t->ptr;
 
 	}
-	return v;
+	return c;
 }
 
 bool Search(int a, int b){
 	Node *t;
 	t = start;
 	while(t!=nullptr){
-		
+
 		if(t->x==a&&t->y==b){
 			return true;
 		}
@@ -98,11 +98,11 @@ int Del(int a, int b){
 	t = start;
 	int c=0;
 	while(t!=nullptr){
-		
+
 		if(t->x==a&&t->y==b){
 			if(c==0||Length()==1){ //If the found node is the first node.
 				DelFirst();
-			
+
 		}
 		else if(t->ptr==nullptr){ //If the found node is the last node.
 			p = t;
@@ -130,7 +130,7 @@ int Del(int a, int b){
 
 int main(){
 
-	
+
 
 
 	long int q;
@@ -140,33 +140,37 @@ int main(){
 		int a,b,c;
 		cin>>a;
 		switch(a){
-			case 1: 
+			case 1:
 				cin>>b>>c;
 				AddFirst(b,c);
 				break;
-			case 2: 
-				cout<<DelFirst()<<endl;
+			case 2:
+			    {int d = DelFirst();
+			    if(d==-1)
+                    cout<<-1<<endl;
+				break;}
+			case 3:
+				{cin>>b>>c;
+				int d = Del(b,c);
+				if(d==-1)
+                    cout<<-1<<endl;}
 				break;
-			case 3: 
-				cin>>b>>c;
-				cout<<Del(b,c)<<endl;
-				break;
-			case 4: 
-				cin>>b;
-				v = Search(b);
-				for(int i=0;i<v.size();i++){
-					cout<<"("<<v[i]->x<<","<<v[i]->y<<")"<<" ";
-				}
+			case 4:
+				{cin>>b;
+				int d = Search(b);
+				if(d==0)
+                    cout<<-1;
+                else cout<<d;
 				cout<<endl;
-				break;
-			case 5: 
+				break;}
+			case 5:
 				cin>>b>>c;
 				if(Search(b,c)==1)
 					cout<<"True"<<endl;
 				else
 					cout<<"False"<<endl;
 				break;
-			case 6: 
+			case 6:
 				cout<<Length()<<endl;
 				break;
 		}
