@@ -9,6 +9,126 @@ struct tree
 	tree *right;
 };
 
+struct bstnode
+{
+    string var;
+    int val;
+    struct bstnode *left, *right;
+};
+
+int comparetwo(string ca, string cb){
+int la = ca.size();
+int lb = cb.size();
+
+int f=0;
+int ds;
+string ans;
+
+if(la>lb){
+	f=1;
+}
+else if(la<lb){
+	f=2;
+}
+else {
+	for(int i=0;i<la;i++){
+		if((ca[i]-'0')>(cb[i]-'0')){
+			f=1; break;
+		}
+		if((ca[i]-'0')<(cb[i]-'0')){
+			f=2; break;
+		}
+
+	}
+}
+
+return f;
+}
+
+
+bstnode* newbstNode(string x, int v)
+{
+    bstnode *temp =  new bstnode;
+    temp->var = x;
+    temp->val = v;
+    temp->left = temp->right = nullptr;
+    return temp;
+}
+
+bstnode* search( bstnode* root, string x)
+{
+    if (root == nullptr)
+       return nullptr;
+
+    if(x.compare(root->var)==0)
+    	return root;
+    if (x.compare(root->var)>0)
+       return search(root->right, x);
+
+    else
+    	return search(root->left, x);
+}
+
+bstnode* insert(bstnode* node, string x, int v)
+{int f=0;
+    /* If the tree is empty, return a new node */
+    bstnode* temp = newbstNode(x,v);
+    if (node == nullptr){
+    	// cout<<temp->val<<" %";
+    	return temp;
+    }
+  	bstnode* foo = node;
+
+    while(node!=nullptr){
+    if (x.compare(node->var)<0) {
+    	if(node->left==nullptr)
+    	// node=node->left;
+    	{
+    		f=1;
+    	break;
+    	}
+
+    }
+    else if (x.compare(node->var)>0)
+    if(node->right==nullptr)
+        // node=node->right;
+    {
+
+        f=2;
+        break;}
+    else {
+    	cout<<"NOOO";
+    }
+}
+    {
+    	if (f==1) {
+    	node->left=temp;
+
+    }
+    else if (f==2)
+       node->right=temp;
+    else {
+    	cout<<"NOOO";
+    }
+    }
+
+    return foo;
+}
+
+void deleteTree(auto node)
+{
+    if (node == NULL) return;
+
+    /* first delete both subtrees */
+    deleteTree(node->left);
+    deleteTree(node->right);
+
+    /* then delete the node */
+//    cout << "\n Deleting node: " << node->var;
+    free(node);
+}
+
+
 int powe(int l, int r){
 	int temp=1;
 	for(int i=0;i<r;i++){
@@ -19,9 +139,9 @@ int powe(int l, int r){
 }
 int isOperand(char c)
 {   if(c=='#')
-return 3;
+return 4;
 if(c=='^')
-	return 4;
+	return 3;
 else if(c=='*'||c =='/')
 	return 2;
 else if(c=='+'||c== '-')
@@ -36,6 +156,7 @@ return 1;
 else return 0;
 }
 
+bstnode* root=nullptr;
 
 tree* newNode(string v){
 	tree *node;
@@ -54,7 +175,7 @@ tree* makeExpressionTree(vector<string> pf){
 
 		if(isOperand(pf[i][0])!=-1){
 
-			if(isOperand(pf[i][0])!=3)
+			if(isOperand(pf[i][0])!=4)
 			{
 
 				r = s.top();
@@ -225,11 +346,8 @@ tree* makeExpressionTree(vector<string> pf){
 		int numsvectoans(vector<string> m){
 			int ans;
 			vector<string> pf;
-			//cout<<m.size()<<")";
-			// for(int i=0;i<m.size();i++){
-			// 	cout<<m[i]<<" ";}
+		
 			pf = intopo(m);
-			//cout<<pf[0]<<" "<<pf[1]<<endl;
 			if(pf.size()==1) {
 				ans=stoi(pf[0]);
 			}
@@ -237,24 +355,24 @@ tree* makeExpressionTree(vector<string> pf){
 				tree* head = makeExpressionTree(pf);
 
 				ans = postOrder(head);
+				deleteTree(head);
 			}
-			//ans=0;
 			return ans;
 
 		}
-		map<string,int> mv;
 		int kvartoans(vector<string> m,int st){
-			//cout<<st;
-			//cout<<"fsdfsdf";
+
 
 				for(int i=st;i<m.size();i++){
 					if(isOper(m[i][0])&&(!((m[i][0]-'0')<10&&(m[i][0]-'0')>=0))){
-				//cout<<mv.count(m[i])<<"&";
-						if(mv.count(m[i])==0){
+						
+						bstnode* t;
+						t = search(root,m[i]);
+						if(t==nullptr){
 							return (-2147483647);
 						}
 						else {
-							m[i]=to_string(mv[m[i]]);
+							m[i]=to_string(t->val);
 						}
 					}
 				}
@@ -340,13 +458,18 @@ tree* makeExpressionTree(vector<string> pf){
 
 											int tem = kvartoans(m,i+2);
 
-											if(tem != (-2147483)){
-												mv[m[i]] = tem;
-												//cout<<"yes";
+											if(tem != (-2147483647)){
+												bstnode* t;
+												t = search(root,m[i]);
+												if(t==nullptr){
+													root = insert(root,m[i],tem);
+												}
+												else {
+													t->val = tem;
+												}
 												break;
 											}
 											else {
-												//cout<<"NOOOOO";
 												f=-1;
 												break;
 											}
@@ -372,12 +495,11 @@ tree* makeExpressionTree(vector<string> pf){
 								else if(f==-1){
 									cout<<"CANT BE EVALUATED"<<endl;
 								}
-// for(auto x: mv){
-// cout<<x.first<<" "<<x.second<<endl;
-// }
-// cout<<"$";
+
 
 							}
-							mv.clear();
+							deleteTree(root);
+							root=nullptr;
+
 						}
 						return 0;}
