@@ -17,18 +17,26 @@ int powe(int l, int r){
 	return temp;
 
 }
-
 int isOperand(char c)
-{
-	if(c=='^')
-		return 3;
-	else if(c=='*'||c =='/')
-		return 2;
-	else if(c=='+'||c== '-')
-		return 1;
-	else
-		return -1;
+{   if(c=='#')
+return 4;
+if(c=='^')
+	return 3;
+else if(c=='*'||c =='/')
+	return 2;
+else if(c=='+'||c== '-')
+	return 1;
+else
+	return -1;
 }
+
+int isOper(char c)
+{   if((isOperand(c)==-1)&& c!='('&&c!=')')
+return 1;
+else return 0;
+}
+
+
 tree* newNode(string v){
 	tree *node;
 	node = new tree;
@@ -45,7 +53,8 @@ tree* makeExpressionTree(vector<string> pf){
 	for(int i=0;i<pf.size();i++){
 
 		if(isOperand(pf[i][0])!=-1){
-			int d=2;
+
+			if(isOperand(pf[i][0])!=4)
 			{
 
 				r = s.top();
@@ -57,9 +66,18 @@ tree* makeExpressionTree(vector<string> pf){
 				head->right = r;
 				s.push(head);
 			}
+			else {
+
+				l = s.top();
+
+				s.pop();
+				head = newNode(pf[i]);
+				head->left = l;
+				s.push(head);
+			}
 		}
 		else {
-		tree *temp = newNode(pf[i]);
+			tree *temp = newNode(pf[i]);
 			s.push(temp);
 		}
 
@@ -67,155 +85,191 @@ tree* makeExpressionTree(vector<string> pf){
 
 	return head;}
 
-	int postOrder(tree* he){
+int postOrder(tree* he){
 
-		if(he->left!=nullptr&&he->right!=nullptr)
-			{int r = postOrder(he->right);
-				int l = postOrder(he->left);
-				int d;
-				switch((he->data)[0]){
-					case '+':{
-						d = l+r;
-						break;
-					}
-					case '-':{
-						d = l-r;
-						break;
-					}
-					case '*':{
-						d = l*r;
-						break;
-					}
-					case '/':{
-						d = l/r;
-						break;
-					}
-					case '^':{
-						d = powe(l,r);
-						break;
-					}
+	if(he->left!=nullptr&&he->right!=nullptr)
+		{int r = postOrder(he->right);
+			int l = postOrder(he->left);
+			int d;
+			switch((he->data)[0]){
 
+				case '+':{
+					d = l+r;
+					break;
 				}
-				return d;
+				case '-':{
+					d = l-r;
+					break;
+				}
+				case '*':{
+					d = l*r;
+					break;
+				}
+				case '/':{
+					d = l/r;
+					break;
+				}
+				case '^':{
+					d = powe(l,r);
+					break;
+				}
 
 			}
-
-			else return stoi(he->data);
+			return d;
 
 		}
 
+		if(he->left!=nullptr&&he->right==nullptr){
+			int l = postOrder(he->left);
+			int d;
+			switch((he->data)[0]){
 
-
-		string getString(char x)
-		{
-
-			string s(1, x);
-
-			return s;
-		}
-
-
-
-		vector<string> intopo(vector<string> str){
-			int len = str.size();
-			stack<char> s;
-			vector<string> pf;
-			for(int i=0;i<len;i++){
-				if((str[i].size()==1)&&isOperand(str[i][0])!=-1){
-
-					if(s.empty()) s.push(str[i][0]);
-					else if (isOperand(str[i][0])==3){
-                        if(isOperand(str[i][0])>=isOperand(s.top())){
-						s.push(str[i][0]);
-					}
-					else {while(!s.empty()&&(isOperand(str[i][0])<isOperand(s.top()))){
-						pf.push_back(getString(s.top()));
-						s.pop();
-					}
-					s.push(str[i][0]);}
-					}
-					else if(isOperand(str[i][0])>isOperand(s.top())){
-						s.push(str[i][0]);
-					}
-					else {while(!s.empty()&&(isOperand(str[i][0])<=isOperand(s.top()))){
-						pf.push_back(getString(s.top()));
-						s.pop();
-					}
-					s.push(str[i][0]);}
-
+				case '#':{
+					d = (-1)*l;
+					break;
 				}
-				else if(str[i][0]=='('){
+
+
+			}
+			return d;
+		}
+
+		else return stoi(he->data);
+
+	}
+
+
+
+string getString(char x)
+{
+
+	string s(1, x);
+
+	return s;
+}
+
+
+
+vector<string> intopo(vector<string> str){
+	int len = str.size();
+	stack<char> s;
+	vector<string> pf;
+	for(int i=0;i<len;i++){
+		if((str[i].size()==1)&&isOperand(str[i][0])!=-1){
+
+			if(s.empty()) s.push(str[i][0]);
+			else if (isOperand(str[i][0])==3){
+				if(isOperand(str[i][0])>=isOperand(s.top())){
 					s.push(str[i][0]);
 				}
-				else if(str[i][0]==')'){
-
-					while(s.top()!='('){
-						pf.push_back(getString(s.top()));
-						s.pop();
-
-					}
-					if(s.top()=='('){
-						s.pop();
-					}
-
+				else {while(!s.empty()&&(isOperand(str[i][0])<isOperand(s.top()))){
+					pf.push_back(getString(s.top()));
+					s.pop();
 				}
-				else {
-					pf.push_back(str[i]);
-				}
+				s.push(str[i][0]);}
 			}
-			while(!s.empty()){
+			else if(isOperand(str[i][0])>isOperand(s.top())){
+				s.push(str[i][0]);
+			}
+			else {while(!s.empty()&&(isOperand(str[i][0])<=isOperand(s.top()))){
+				pf.push_back(getString(s.top()));
+				s.pop();
+			}
+			s.push(str[i][0]);}
 
+		}
+		else if(str[i][0]=='('){
+			s.push(str[i][0]);
+		}
+		else if(str[i][0]==')'){
+
+			while(s.top()!='('){
 				pf.push_back(getString(s.top()));
 				s.pop();
 
 			}
-			return pf;
+			if(s.top()=='('){
+				s.pop();
+			}
+
+		}
+		else {
+			pf.push_back(str[i]);
+		}
+	}
+	while(!s.empty()){
+
+		pf.push_back(getString(s.top()));
+		s.pop();
+
+	}
+	return pf;
+}
+
+
+string unaryMinus(string str){
+	if(str[0]=='-'){
+		str[0]='#';
+	}
+	for(int i=1;i<str.size();i++){
+		if(str[i]=='-'&& (!isOper(str[i-1])))
+		{
+			str[i]='#';
 		}
 
+	}
+
+	return str;
+}
 
 
-		int main(){
+int main(){
 
-			int t;
-			cin>>t;
-			int n;
-			for(int o=0;o<t;o++){
-				string str;
-				vector<string> pf;
-				cin>>n;
-				for(int i=0;i<n;i++){
-					cin>>str;
-					vector<string> m;
-					string temp;
+	int t;
+	cin>>t;
+	int n;
+	for(int o=0;o<t;o++){
+		string str;
+		vector<string> pf;
+		cin>>n;
+		for(int i=0;i<n;i++){
+			cin>>str;
 
-					for(int k=0;k<str.size();k++){
-						if((str[k]=='(')){
-							m.push_back(getString(str[k]));
-							continue;
-						}
-						if((str[k]-'0')<10&&(str[k]-'0')>=0) {
-							temp+=str[k];
-						}
-						else {
-							if(temp!="")
-								m.push_back(temp);
-							m.push_back(getString(str[k]));
-							temp="";
-						}
+			str=unaryMinus(str);
 
-					}
+			vector<string> m;
+			string temp;
+
+			for(int k=0;k<str.size();k++){
+				if((str[k]=='(')){
+					m.push_back(getString(str[k]));
+					continue;
+				}
+				if((str[k]-'0')<10&&(str[k]-'0')>=0) {
+					temp+=str[k];
+				}
+				else {
 					if(temp!="")
 						m.push_back(temp);
+					m.push_back(getString(str[k]));
 					temp="";
-
-					pf = intopo(m);
-
-
-					tree* head = makeExpressionTree(pf);
-
-					int ans = postOrder(head);
-					cout<<ans<<endl;
-
 				}
+
 			}
-			return 0;}
+			if(temp!="")
+				m.push_back(temp);
+			temp="";
+
+			pf = intopo(m);
+			if(pf.size()==1) {
+				cout<<pf[0]<<endl;
+			}
+			else  {
+				tree* head = makeExpressionTree(pf);
+
+				int ans = postOrder(head);
+				cout<<ans<<endl;
+			}
+		}
+	}
+return 0;}
