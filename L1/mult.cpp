@@ -55,7 +55,7 @@ for(int i=0;i<y;i++){
 		}
 
 		}
-		
+
 	}
 	else {
 		ds = a[i]+b[i]+c;
@@ -103,7 +103,7 @@ if(c==0){
 			continue;
 		}
 		else {
-			ans += to_string(s[i]);			
+			ans += to_string(s[i]);
 			fir=0;
 		}
 
@@ -121,6 +121,10 @@ return ans;
 }
 
 int main(){
+     int t;
+cin>>t;
+for(int o=0;o<t;o++)
+{
 string ca;
 string cb;
 
@@ -205,7 +209,7 @@ for(int i=0;i<la;i++){
 	// 	}
 
 	// 	}
-		
+
 	// }else
 // 	for(int i=0;i<la;i++)
 // {
@@ -242,7 +246,7 @@ if(c!=0){
 		}
 		else {
 		ans+= to_string(s[i]);
-			
+
 			fir=0;
 		}
 
@@ -262,7 +266,7 @@ int fir=1;
 		}
 		else {
 	ans+= to_string(s[i]);
-			
+
 			fir=0;
 		}
 
@@ -288,7 +292,7 @@ cout<<pro<<endl;
 
 
 
-
+}
 
 
 

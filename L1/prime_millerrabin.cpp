@@ -53,6 +53,9 @@ bool prime(lli n,int p)
     return true;
 }
 int main()
+{int t;
+cin>>t;
+for(int o=0;o<t;o++)
 {
    lli n,p=4;
    cin>>n;
@@ -60,6 +63,6 @@ int main()
     cout<<"Prime"<<endl;
    else
    cout<<"Not prime"<<endl;
-
+}
     return 0;
 }

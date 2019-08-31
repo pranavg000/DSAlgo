@@ -21,11 +21,14 @@ bool isprime(lli n)
     return true;
 }
 int main()
+{ int t;
+cin>>t;
+for(int o=0;o<t;o++)
 {
    lli n;
    cin>>n;
-   if(isprime(n)) cout<<"prime"<<endl;
-   else cout<<"not prime"<<endl;
-
+   if(isprime(n)) cout<<"Prime"<<endl;
+   else cout<<"Not a Prime"<<endl;
+}
     return 0;
 }

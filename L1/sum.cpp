@@ -7,7 +7,9 @@ int main(){
 
 // vector<char> ca;
 // vector<char> cb;
-
+int t;
+cin>>t;
+for(int o=0;o<t;o++){
 string ca;
 string cb;
 
@@ -87,7 +89,7 @@ for(int i=0;i<y;i++){
 		}
 
 		}
-		
+
 	}
 	else {
 		ds = a[i]+b[i]+c;
@@ -114,9 +116,9 @@ if(c==0){
 	cout<<s[i];
 }
 }
+cout<<endl;
 
-
-
+}
 
 
 

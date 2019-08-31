@@ -6,6 +6,10 @@ using namespace std;
 int main(){
 
 
+int t;
+cin>>t;
+for(int o=0;o<t;o++)
+{
 
 
 string ca;
@@ -156,5 +160,6 @@ int fir=1;
 if(ans.size()>0)
 cout<<ans;
 else cout<<0;
-
+cout<<endl;
+}
 return 0;}

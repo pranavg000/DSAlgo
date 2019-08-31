@@ -379,6 +379,12 @@ return pro;
 
 
 int main(){
+
+
+    int t;
+cin>>t;
+for(int o=0;o<t;o++)
+{
 string ca;
 string cb;
 
@@ -492,8 +498,9 @@ break;
 
 }
 if(temp.size()>0)
-cout<<"Quotient : "<<quo<<endl<<"Remainder : "<<temp<<endl;
+cout<<quo<<endl<<temp<<endl;
 
 else
-cout<<"Quotient : "<<quo<<endl<<"Remainder : "<<0<<endl;
+cout<<quo<<endl<<0<<endl;
+}
 return 0;}
