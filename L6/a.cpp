@@ -133,21 +133,21 @@ using namespace std;
 //     	return search(root->left, x);
 // }
 
-int binarySearch(vector<int> &arr, int l, int r, int x)
+int binarySearch(vector<int> &vec, int l, int r, int x)
 {
 	if (r >= l) {
 		int mid = l + (r - l) / 2;
 
 
-		if (arr[mid] == x)
+		if (vec[mid] == x)
 			return mid;
 
 
-		if (arr[mid] > x)
-			return binarySearch(arr, l, mid - 1, x);
+		if (vec[mid] > x)
+			return binarySearch(vec, l, mid - 1, x);
 
 
-		return binarySearch(arr, mid + 1, r, x);
+		return binarySearch(vec, mid + 1, r, x);
 	}
 
 
@@ -162,32 +162,32 @@ void swap(int* a, int* b)
 }
 
 
-int partition (vector<int> &arr, int low, int high)
+int partition (vector<int> &vec, int low, int high)
 {
-	int pivot = arr[high];
+	int pivot = vec[high];
 	int i = (low - 1);
 
 	for (int j = low; j <= high - 1; j++)
 	{
-		if (arr[j] < pivot)
+		if (vec[j] < pivot)
 		{
 			i++;
-			swap(&arr[i], &arr[j]);
+			swap(&vec[i], &vec[j]);
 		}
 	}
-	swap(&arr[i + 1], &arr[high]);
+	swap(&vec[i + 1], &vec[high]);
 	return (i + 1);
 }
 
-void quickSort(vector<int> &arr, int low, int high)
+void quickSort(vector<int> &vec, int low, int high)
 {
 	if (low < high)
 	{
 
-		int pi = partition(arr, low, high);
+		int pi = partition(vec, low, high);
 
-		quickSort(arr, low, pi - 1);
-		quickSort(arr, pi + 1, high);
+		quickSort(vec, low, pi - 1);
+		quickSort(vec, pi + 1, high);
 	}
 }
 
