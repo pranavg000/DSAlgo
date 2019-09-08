@@ -193,12 +193,12 @@ void quickSort(vector<int> &vec, int low, int high)
 
 
 
-
+vector<int> a,ud[2];
 int main(){
 	int n,option,user,recharge;
 	cin>>n;
 	int t,q=0;
-	vector<int> a,ud[2];
+
 	int buser=-1,big=-1;
 	cin>>t;
 	for(int i=0;i<t;i++){
@@ -208,13 +208,13 @@ int main(){
 			a.push_back(user);
 			ud[0].push_back(user);
 			ud[1].push_back(recharge);
-			
+
 			q++;
 		}
 		else {
 			ud[0].push_back(1);
 			ud[1].push_back(-1);
-			
+
 		}
 
 	}
