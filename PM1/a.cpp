@@ -71,7 +71,7 @@ int partition(vector<lli> &v, lli mom, int left, int right){
 				if(s==1) mom=medians[0];
 				else mom = findmedian(medians, 0, s-1, (s+1)/2);
 
-    
+
 				int index = partition(v, mom,left, right);
 
 				if(index-left == k-1) return v[index];
@@ -100,7 +100,7 @@ int partition(vector<lli> &v, lli mom, int left, int right){
 					cin>>a>>b;
 					v.push_back(a*a+b*b);
 				}
-				cout<<sqrt(findmedian(v, 0, n-1, (n+1)/2))<<endl;
+				cout<<setprecision(6)<<fixed<<sqrt(findmedian(v, 0, n-1, (n+1)/2))<<endl;
 				v.clear();
 			}
 
