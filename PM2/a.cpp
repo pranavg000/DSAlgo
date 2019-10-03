@@ -28,12 +28,12 @@ bool comp(Point p1, Point p2){
     return true;
 }
 
-Point ntt(){
-
-}
 
 int main(){
+int jhj;
 
+    jhj=1;
+    for(int o=0;o<jhj;o++){
     int t;
     cin>>t;
     int x,y;
@@ -61,10 +61,6 @@ swap(p[0],p[mi]);
 
 sort(p.begin()+1,p.end(),comp);
 
-/*for(int i=0;i<t;i++)
-{
-    cout<<p[i].x<<" "<<p[i].y<<endl;
-}*/
 
 q.push_back(p[0]);
 for(int i=1;i<t-1;i++){
@@ -77,12 +73,7 @@ for(int i=1;i<t-1;i++){
         cout<<-1;
         exit(0);
     }
-/*
-cout<<"%"<<endl;
-for(int i=0;i<q.size();i++){
-    cout<<q[i].x<<" "<<q[i].y<<endl;
-}
-cout<<"%"<<endl;*/
+
 stack<Point> s;
 
 s.push(q[0]);
@@ -110,18 +101,19 @@ for(int i=3;i<q.size();i++){
 vector<Point> ans;
 
 while(!s.empty()){
-    //cout<<s.top().x<<" "<<s.top().y<<endl;
+
     ans.push_back(s.top());
     s.pop();
 }
 int len = ans.size();
-xmin = p[0].x;
+xmin = ans[0].x;
 mi = 0;
-ymin = p[0].y;
+ymin = ans[0].y;
 for(int i=1;i<len;i++){
-    if(xmin>p[i].x||(xmin==p[i].x&&(ymin>p[i].y))){
-        xmin = p[i].x;
-        ymin = p[i].y;
+
+    if((xmin>ans[i].x)||(xmin==ans[i].x&&(ymin>ans[i].y))){
+        xmin = ans[i].x;
+        ymin = ans[i].y;
         mi=i;
     }
 }
@@ -129,9 +121,12 @@ for(int i=1;i<len;i++){
 cout<<len<<endl;
 for(int i=0;i<len;i++)
 {
-    cout<<ans[(mi+i)%len].x<<" "<<ans[(mi+i)%len].y<<endl;
+    cout<<ans[(mi+i+len)%len].x<<" "<<ans[(mi+i+len)%len].y<<endl;
 }
+        p.clear();
+        q.clear();
 
+    }
 
 
 
