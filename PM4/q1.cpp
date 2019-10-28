@@ -4,16 +4,16 @@ using namespace std;
 #define lli long long
 #define N 300000
 
-
+   vector<int> v[N];
+   bool visited[N]={0};
+   queue<int> q;
+   int color[N]={0};
 
 class Graph{
 
 
    int V;
-   vector<int> v[N];
-   bool visited[N]={0};
-   queue<int> q;
-   int color[N]={0};
+
 
 public:
    Graph(int V)
@@ -47,7 +47,7 @@ void bipartite(){
     }
 
    }
-	
+
 }
 
 void printColor(){
@@ -66,8 +66,8 @@ void bfs(int x){
        q.pop();
 
        for(int u : v[s]){
-           if(visited[u]==1) 
-            {if(color[u]==(-1*color[s])) continue; 
+           if(visited[u]==1)
+            {if(color[u]==(-1*color[s])) continue;
              else {cout<<"NO"; exit(0);} }
            visited[u]=1;
            color[u]=-1*color[s];
