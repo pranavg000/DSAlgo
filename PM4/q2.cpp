@@ -2,7 +2,7 @@
 
 using namespace std;
 #define lli long long
-#define N 1000
+#define N 300000
 
 
 
