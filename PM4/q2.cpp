@@ -44,25 +44,42 @@ for(int i=0;i<meme;i++){
 }
 
 void bipartite(){
-	bfs(1);
+  for(int i=1;i<V+1;i++){
+    if(visited[i]) continue;
+    else {
+      color[i]=1;
+      bfs(i);
+    }
+
+   }
+  
+}
+
+void printColor(){
+  for(int i=1;i<V+1;i++){
+      cout<<color[i]<<" ";
+  }
 }
 
 
 void bfs(int x){
    visited[x]=1;
    q.push(x);
-   color[x]=1;
    while(!q.empty())
    {
        int s = q.front();
        q.pop();
 
        for(int u : v[s]){
-           if(visited[u]==1) {if(color[u]==(-1*color[s])) continue; else {cout<<"YES"; exit(0);} }
+           if(visited[u]==1) 
+            {if(color[u]==(-1*color[s])) continue; 
+             else {cout<<"YES"<<endl; exit(0);} }
            visited[u]=1;
-           //cout<<u<<endl;
            color[u]=-1*color[s];
-           q.push(u);}}}
+           q.push(u);
+         }
+         }
+  }
 
 
 

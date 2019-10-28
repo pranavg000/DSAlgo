@@ -8,13 +8,14 @@ using namespace std;
 
 class Graph{
 
-public:
+
    int V;
    vector<int> v[N];
    bool visited[N]={0};
    queue<int> q;
    int color[N]={0};
 
+public:
    Graph(int V)
 {
    this->V = V;
@@ -38,25 +39,42 @@ void dfs(int x){
     }
 
 void bipartite(){
-	bfs(1);
+  for(int i=1;i<V+1;i++){
+    if(visited[i]) continue;
+    else {
+      color[i]=1;
+      bfs(i);
+    }
+
+   }
+	
+}
+
+void printColor(){
+  for(int i=1;i<V+1;i++){
+      cout<<color[i]<<" ";
+  }
 }
 
 
 void bfs(int x){
    visited[x]=1;
    q.push(x);
-   color[x]=1;
    while(!q.empty())
    {
        int s = q.front();
        q.pop();
 
        for(int u : v[s]){
-           if(visited[u]==1) {if(color[u]==(-1*color[s])) continue; else {cout<<"NO"; exit(0);} }
+           if(visited[u]==1) 
+            {if(color[u]==(-1*color[s])) continue; 
+             else {cout<<"NO"; exit(0);} }
            visited[u]=1;
-           //cout<<u<<endl;
            color[u]=-1*color[s];
-           q.push(u);}}}
+           q.push(u);
+         }
+         }
+  }
 
 int connectedcomponents(int n){
    int ans=0;
@@ -65,11 +83,9 @@ int connectedcomponents(int n){
            ans++;
            dfs(i);
        }
-
    }
    return ans;
 }
-
 };
 
 int main(){
@@ -84,6 +100,7 @@ int main(){
 
 	G.bipartite();
 cout<<"YES"<<endl;
+
 
 
 
