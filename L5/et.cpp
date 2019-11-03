@@ -71,7 +71,7 @@ bstnode* search( bstnode* root, string x)
 
 bstnode* insert(bstnode* node, string x, int v)
 {int f=0;
-    /* If the tree is empty, return a new node */
+
     bstnode* temp = newbstNode(x,v);
     if (node == nullptr){
     	// cout<<temp->val<<" %";
@@ -119,12 +119,11 @@ void deleteTree(auto node)
 {
     if (node == NULL) return;
 
-    /* first delete both subtrees */
     deleteTree(node->left);
     deleteTree(node->right);
 
-    /* then delete the node */
-//    cout << "\n Deleting node: " << node->var;
+
+
     free(node);
 }
 
@@ -346,7 +345,7 @@ tree* makeExpressionTree(vector<string> pf){
 		int numsvectoans(vector<string> m){
 			int ans;
 			vector<string> pf;
-		
+
 			pf = intopo(m);
 			if(pf.size()==1) {
 				ans=stoi(pf[0]);
@@ -365,7 +364,7 @@ tree* makeExpressionTree(vector<string> pf){
 
 				for(int i=st;i<m.size();i++){
 					if(isOper(m[i][0])&&(!((m[i][0]-'0')<10&&(m[i][0]-'0')>=0))){
-						
+
 						bstnode* t;
 						t = search(root,m[i]);
 						if(t==nullptr){
