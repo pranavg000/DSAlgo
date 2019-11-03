@@ -1,70 +1,61 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-#define uli unsigned long long int
-#define lli long long int
-#define Lf long double
-#define mod 1000000007
-#define SIZE 21
-#define vi vector<int>
-#define vl vector<long>
-#define vll vector<long long>
-#define vc vector<char>
-#define ii <int, int>
-#define ll <long, long>
-#define lll <long long, long long>
-#define loop(i,n) for(int i=0;i<n;i++)
-#define loopr(i,n) for(int i=n-1;i>=0;i--)
+
 #define N 1000
 
-struct Node{
-	Node* parent;
-	int rank;
-	int val;
+
+vector<int> parent, rank_;
+
+void makeSet(int x){
+	parent[x]=x;
+	rank_[x]=0;
 }
 
+int findSet(int x){
+	if(x!=parent[x])
+		parent[x]=findSet(parent[x]);
 
-Node* createNode(int v){
-	Node* temp = new Node();
-	temp->rank = 0;
-	temp->val = v;
-	temp->parent = nullptr;
-	return temp;
+	return parent[x];
 }
 
-Node* findRoot(Node* x){
-	if(x->parent!=nullptr){
-		x->parent = findRoot(x->parent);
+void unionSets(int x, int y){
+	int px = findSet(x);
+	int py = findSet(y);
+
+	if(rank_[px]<rank_[py]){
+		parent[px]=py;
+	}
+	else if(rank_[py]<rank_[px]){
+		parent[py]=px;
+	}
+	else{
+		parent[py]=px;
+		rank_[px]++;
 	}
 
-	return x->parent;
 }
-
-
-Node* Union(Node* x, Node* y){
-	Node* rootx = findRoot(x);
-	Node* rooty = findRoot(y);
-
-	if(rootx->rank < rooty->rank){
-		rootx->parent = rooty;
-		return rooty;
-	}
-	else if(rootx->rank > rooty->rank){
-		rooty->parent = rootx;
-		return rootx;
-	}
-	else {
-		rootx->parent = rooty;
-		rooty->rank++;
-		return rooty;
-	}
-}
-
-
 
 
 
 int main()
 {
+	int n;
+	cin>>n;
+	parent.resize(n+3);
+	rank_.resize(n+3);
+
+//	makeSet(1);
+//	makeSet(3);
+//	makeSet(6);
+//	makeSet(5);
+//
+//	unionSets(3,6);
+//	cout<<findSet(3);
+//	cout<<findSet(6);
+//	cout<<findSet(5);
+//	unionSets(1,5);
+//	cout<<findSet(5);
+
 	return 0;
 }
