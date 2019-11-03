@@ -3,15 +3,15 @@
 using namespace std;
 
 struct Node{
-	int val;
+	int value;
     Node *left;
     Node *right;
     int height;
 };
 
-Node* newNode(int val){
+Node* newNode(int value){
     Node* node = new Node();
-    node->val = val;
+    node->value = value;
     node->left = nullptr;
     node->right = nullptr;
     node->height = 1;
@@ -69,18 +69,18 @@ int getBalance(Node *N)
 }
 
 int f=-1;
-Node* insertMain(Node* node, int val)
+Node* insertMain(Node* node, int value)
 {
     /* 1. Perform the normal BST insertion */
     if (node == nullptr){
-        return(newNode(val));
+        return(newNode(value));
     }
 
-    if (val<node->val){
-            node->left = insertMain(node->left, val);
+    if (value<node->value){
+            node->left = insertMain(node->left, value);
         }
-    else if (val>node->val){
-            node->right = insertMain(node->right, val);
+    else if (value>node->value){
+            node->right = insertMain(node->right, value);
         }
     else{
             cout<<"Same value Found !!"<<endl<<"Aborting...";
@@ -97,23 +97,22 @@ Node* insertMain(Node* node, int val)
 
         if(balance>1){
             f=1;
-            if(val<(node->left->val)){
-
+            if(getBalance(node->left)>=0){
                 return rightRotate(node);
             }
-            else if(val>(node->left->val)){
+            else if(getBalance(node->left)<0){
                 node->left = leftRotate(node->left);
                 return rightRotate(node);
             }
         }
         else if(balance<-1){
             f=1;
-             if(val<(node->right->val)){
+             if(getBalance(node->right)>0){
 
                 node->right = rightRotate(node->right);
                 return leftRotate(node);
             }
-            else if(val>(node->right->val)){
+            else if(getBalance(node->right)<=0){
                 return leftRotate(node);
             }
         }
@@ -124,9 +123,9 @@ Node* insertMain(Node* node, int val)
 
 
 
-Node* insert(Node* node, int val){
+Node* insert(Node* node, int value){
     f=-1;
-    return insertMain(node, val);
+    return insertMain(node, value);
 
 }
 
@@ -140,46 +139,67 @@ Node* minimum(Node* node){
 
 
 
-Node* deleteNode(Node* root, int x){
-    if (root == nullptr){
+Node* deleteNode(Node* node, int x){
+    if (node == nullptr){
         cout<<"Not Found !!"<<endl;
         return nullptr;
     }
-    else if(x > root->value){
-        root->right = deleteNode(root->right, x);
+    else if(x > node->value){
+        node->right = deleteNode(node->right, x);
     }
-    else if(x < root->value){
-        root->left = deleteNode(root->left, x);
+    else if(x < node->value){
+        node->left = deleteNode(node->left, x);
     }
     else {
-        if(root->left == nullptr){
-            Node* temp  = root->right;
-            delete root;
+        if(node->left == nullptr){
+            Node* temp  = node->right;
+            delete node;
             return temp;
         }
-        else if(root->right == nullptr){
-            Node* temp  = root->left;
-            delete root;
+        else if(node->right == nullptr){
+            Node* temp  = node->left;
+            delete node;
             return temp;
         }
         else {
-            Node* temp  = minimum(root->right);
-            root->value = temp->value;
-            root->right = deleteNode(root->right, temp->value);
-            return root;
+            Node* temp  = minimum(node->right);
+            node->value = temp->value;
+            node->right = deleteNode(node->right, temp->value);
+            return node;
         }
     }
 
-    if (root == nullptr){
+    if (node == nullptr){
         return nullptr;
     }
-
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
-    
+     
+     int balance = getBalance(node);
 
+        if(balance>1){
+            f=1;
+            if(getBalance(node->left)>=0){
+                return rightRotate(node);
+            }
+            else if(getBalance(node->left)<0){
+                node->left = leftRotate(node->left);
+                return rightRotate(node);
+            }
+        }
+        else if(balance<-1){
+            f=1;
+             if(getBalance(node->right)>0){
+
+                node->right = rightRotate(node->right);
+                return leftRotate(node);
+            }
+            else if(getBalance(node->right)<=0){
+                return leftRotate(node);
+            }
+        }
+        return node;
 
 }
-
 
 
 
@@ -191,9 +211,9 @@ Node* search( Node* root, int x)
     if (root == nullptr)
        return nullptr;
 
-    if(x == root->val)
+    if(x == root->value)
     	return root;
-    if (x>root->val)
+    if (x>root->value)
        return search(root->right, x);
 
     else
@@ -201,7 +221,7 @@ Node* search( Node* root, int x)
 }
 
 void func(Node* node){
-    cout<<node->val<<" ";
+    cout<<node->value<<" ";
 }
 
 
@@ -218,27 +238,6 @@ void preorderTraversal(Node* root){
 
 int main()
 {
-    Node *root = NULL;
-
-    /* Constructing tree given in
-    the above figure */
-    root = insert(root, 10);
-    root = insert(root, 20);
-    root = insert(root, 30);
-    root = insert(root, 40);
-    root = insert(root, 50);
-    root = insert(root, 25);
-
-    /* The constructed AVL Tree would be
-                30
-            / \
-            20 40
-            / \ \
-        10 25 50
-    */
-    cout << "Preorder traversal of the "
-            "constructed AVL tree is \n";
-    preorderTraversal(root);
-
+    
     return 0;
 }
