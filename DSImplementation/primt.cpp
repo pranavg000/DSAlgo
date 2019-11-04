@@ -4,6 +4,9 @@ using namespace std;
 
 typedef pair<int, int> p;  
 
+vector<pair<pair<int, int>, int> > ansEdges;
+
+
 void prim(vector<pair<int,int> > adjlist[], int n)
 {
     int wt[n];
@@ -42,7 +45,8 @@ void prim(vector<pair<int,int> > adjlist[], int n)
     int sum=0;
     for(int i=1;i<n;i++)
     {
-        cout<<i+1<<" "<<parent[i]+1<<" "<<wt[i]<<endl;
+        ansEdges.push_back({{i+1,parent[i]+1},wt[i]});
+        
         sum+=wt[i];
     }
 
