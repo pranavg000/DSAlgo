@@ -17,11 +17,12 @@ void prim(vector<pair<int,int> > adjlist[], int n)
         wt[i] = INT_MAX;
         parent[i] = -1;
     }
-    // starting vertex is 0
-    parent[0] = 0;
+    
     wt[0] = 0;
-    // min heap
-    priority_queue< p, vector <p> , greater<p> > pq; // (wt,source)
+    parent[0] = 0;
+    
+ 
+    priority_queue< p, vector <p> , greater<p> > pq;
     pq.push(make_pair(0,0));
     
     while(!pq.empty())
@@ -46,11 +47,11 @@ void prim(vector<pair<int,int> > adjlist[], int n)
     for(int i=1;i<n;i++)
     {
         ansEdges.push_back({{i+1,parent[i]+1},wt[i]});
-        
+        cout<<i+1<<" -- "<<parent[i]+1<<" wt: "<<wt[i]<<endl;
         sum+=wt[i];
     }
 
-    cout<<sum<<endl;
+    cout<<"sum is : "<<sum<<endl;
     
     
 }

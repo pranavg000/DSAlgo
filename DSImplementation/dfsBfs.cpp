@@ -33,7 +33,7 @@ void dfs(int x){
         cout<<x<<endl;
         for(int u:v[x])
         {
-        dfs(n,u);
+        dfs(u);
         }
     }
 }
@@ -42,7 +42,7 @@ void dfs(int x){
 void bfs(int x){
     visited[x]=1;
     q.push(x);
-    dist[x]=0;
+   
 
     while(!q.empty())
     {
@@ -70,7 +70,19 @@ void addEdge(int a, int b)
 
 int main()
 {
+    int n;
+    cin>>n;
+    int m;
+    cin>>m;
+    int x,y;
+    for (int i = 0; i < m; i++)
+    {
+        cin>>x>>y;
+        addEdge(x,y);
+    }
 
+    dfs(1);
+    
 
 
 

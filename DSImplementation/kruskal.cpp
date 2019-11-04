@@ -6,7 +6,6 @@ using namespace std;
 #define N 1000
 #define pb push_back
 
-
 vector<int> parent, rank_;
 
 void makeSet(int x){
@@ -80,10 +79,13 @@ int main(){
 			ansEdges.pb(i);
 		}
 	}
-
+	int sum=0;
 	for(Edge x: ansEdges){
-		cout<<x.start<<" "<<x.destination<<" "<<x.weight<<endl;
+		cout<<x.start<<" -- "<<x.destination<<" wt: "<<x.weight<<endl;
+		sum+=x.weight;
 	}
+
+	cout<<"sum is : "<<sum<<endl;
 
 
 
