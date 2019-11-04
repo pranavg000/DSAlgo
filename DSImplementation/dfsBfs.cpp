@@ -36,9 +36,9 @@ void dfs(int x){
         dfs(n,u);
         }
     }
-
-
 }
+
+
 void bfs(int x){
     visited[x]=1;
     q.push(x);
@@ -58,6 +58,9 @@ void bfs(int x){
     }
 
 }
+
+
+
 
 void addEdge(int a, int b)
     {
