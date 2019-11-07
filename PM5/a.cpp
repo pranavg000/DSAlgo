@@ -76,11 +76,11 @@ int main(){
 	}
 
 	sort(v.begin(), v.end(), comp);
-
+    lli ans=1;
 	for(Edge i: v){
 		if(findSet(i.start)!=findSet(i.destination)){
 			unionSets(i.start, i.destination);
-			ans*=i.w;
+			ans*=i.weight;
 		}
 	}
 
