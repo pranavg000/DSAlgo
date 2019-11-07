@@ -3,6 +3,7 @@
 #include<algorithm>
 using namespace std;
 
+static const long long int mod = (long long)(1e9 + 7);
 #define N 1000
 #define pb push_back
 #define lli long long
@@ -99,9 +100,5 @@ int main(){
 	}
 
 	cout<<ans<<endl;
-
-
-
-
 	return 0;
 }
