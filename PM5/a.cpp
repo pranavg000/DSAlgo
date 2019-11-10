@@ -3,10 +3,25 @@
 #include<algorithm>
 using namespace std;
 
+static const long long int mod = (long long)(1e9 + 7);
 #define N 1000
 #define pb push_back
 #define lli long long
 
+inline lli modadd(lli n,lli m){
+    lli sum = ((n+m)%mod+mod)%mod;
+    return sum;
+}
+
+inline lli modsub(lli n,lli m){
+    lli diff = ((n-m+mod)%mod+mod)%mod;
+    return diff;
+}
+
+inline lli modpro(lli n,lli m){
+    lli pro = ((n*m)%mod+mod)%mod;
+    return pro;
+}
 
 
 vector<int> parent, rank_;
@@ -80,14 +95,10 @@ int main(){
 	for(Edge i: v){
 		if(findSet(i.start)!=findSet(i.destination)){
 			unionSets(i.start, i.destination);
-			ans*=i.weight;
+			ans=modpro(i.weight,ans);
 		}
 	}
 
 	cout<<ans<<endl;
-
-
-
-
 	return 0;
 }
