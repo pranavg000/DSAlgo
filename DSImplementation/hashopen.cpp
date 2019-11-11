@@ -116,7 +116,7 @@ void init_(){
 int main(){
 
 	cin>>n;
-//n=4;m=2;
+
     init_();
 
     Insert(1);
