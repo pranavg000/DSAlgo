@@ -204,14 +204,14 @@ void PrintQueue(){
 
 
 int main(){
-//	cout<<LengthO1()<<endl;
-//	Enqueue(10);
-//	Enqueue(1);
-//	Enqueue(2);
-//    PrintQueue();
-//    cout<<Front()<<endl;
-//    Dequeue();
-//    PrintQueue();
-//    cout<<Front();
+	cout<<LengthO1()<<endl;
+	Enqueue(10);
+	Enqueue(1);
+	Enqueue(2);
+   PrintQueue();
+   cout<<Front()<<endl;
+   Dequeue();
+   PrintQueue();
+   cout<<Front()<<endl;
 	return 0;
 }

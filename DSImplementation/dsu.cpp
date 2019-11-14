@@ -45,17 +45,17 @@ int main()
 	parent.resize(n+3);
 	rank_.resize(n+3);
 
-//	makeSet(1);
-//	makeSet(3);
-//	makeSet(6);
-//	makeSet(5);
-//
-//	unionSets(3,6);
-//	cout<<findSet(3);
-//	cout<<findSet(6);
-//	cout<<findSet(5);
-//	unionSets(1,5);
-//	cout<<findSet(5);
+	makeSet(1);
+	makeSet(3);
+	makeSet(6);
+	makeSet(5);
+
+	unionSets(3,6);
+	cout<<findSet(3)<<endl;
+	cout<<findSet(6)<<endl;
+	cout<<findSet(5)<<endl;
+	unionSets(1,5);
+	cout<<findSet(5)<<endl;
 
 	return 0;
 }

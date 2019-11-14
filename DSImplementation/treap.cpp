@@ -87,7 +87,7 @@ Node* search(Node* root,int key){
 }
 
 void func(Node* node){
-    cout<<node->key<<" ";
+    cout<<node->key<<" ("<<node->rank_<<")"<<endl;
 }
 
 void inorderTraversal(Node* root){
@@ -97,21 +97,19 @@ void inorderTraversal(Node* root){
     inorderTraversal(root->right);
 }
 
-//void inorder(Node* root)
-//{
-//    if (root)
-//    {
-//        inorder(root->left);
-//        cout << "key: "<< root->key << " | rank_: %d "
-//            << root->rank_;
-//        if (root->left)
-//            cout << " | left child: " << root->left->key;
-//        if (root->right)
-//            cout << " | right child: " << root->right->key;
-//        cout << endl;
-//        inorder(root->right);
-//    }
-//}
+void postorderTraversal(Node* root){
+    if(root == nullptr) return;
+    postorderTraversal(root->left);
+    postorderTraversal(root->right);
+    func(root);
+}
+
+void preorderTraversal(Node* root){
+    if(root == nullptr) return;
+    func(root);
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
+}
 
 
 Node* Delete(Node* node, int key){
@@ -160,55 +158,21 @@ Node* extractMax(Node* root){
 
 int main(){
 
-
 	Node* root = nullptr;
-//	root = insert(root, 50);
-//    root = insert(root, 30);
-//    root = insert(root, 20);
-//    root = insert(root, 40);
-//    root = insert(root, 70);
-//    root = insert(root, 60);
-//    root = insert(root, 80);
-//	// search(root, 1);
-//	// search(root, 2);
-//	// search(root, 3);
-//	// search(root, 4);
-//	inorder(root);
-//
-//	cout << "Inorder traversal of the given tree \n";
-//    inorder(root);
-//
-//    cout << "\nDeletee 20\n";
-//    root = Delete(root, 20);
-//    cout << "Inorder traversal of the modified tree \n";
-//    inorder(root);
-//
-//    cout << "\nDeletee 30\n";
-//    root = Delete(root, 30);
-//    cout << "Inorder traversal of the modified tree \n";
-//    inorder(root);
-//
-//    cout << "\nDeletee max\n";
-//    root = extractMax(root);
-//    cout << "Inorder traversal of the modified tree \n";
-//    inorder(root);
-//
-//
-//    cout << "\nDeletee max\n";
-//    root = extractMax(root);
-//    cout << "Inorder traversal of the modified tree \n";
-//    inorder(root);
-//
-//
-//    cout << "\nDeletee max\n";
-//    root = extractMax(root);
-//    cout << "Inorder traversal of the modified tree \n";
-//    inorder(root);
-//
-//    Node *res = search(root, 50);
-//    (res == NULL)? cout << "\n50 Not Found ":
-//                   cout << "\n50 found";
-//
+	root = insert(root, 13);
+	root = insert(root, 15);
+	root = insert(root, 7);
+	root = insert(root, 17);
+	root = insert(root, 11);
+	root = insert(root, 5);
+	root = insert(root, 3);
+	search(root, 1);
+	search(root, 3);
+	inorderTraversal(root);
+	cout<<endl;
+	preorderTraversal(root);
+
+
 
 
 	return 0;

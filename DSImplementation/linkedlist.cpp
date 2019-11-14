@@ -225,21 +225,21 @@ void PrintLL(){
 
 int main(){
 
-//AddLast(4);
-//cout<<LengthO1();
-//   AddFirst(2);
-//cout<<LengthO1();
-//   AddFirst(5);
-//   AddLast(3);
-//cout<<LengthO1();
-//
-//
-//
-//   PrintLL();
-//   cout<<endl;
-//Del(4);
-//cout<<LengthO1();
-//   PrintLL();
+AddLast(4);
+cout<<LengthO1();
+  AddFirst(2);
+cout<<LengthO1();
+  AddFirst(5);
+  AddLast(3);
+cout<<LengthO1();
+
+
+
+  PrintLL();
+  cout<<endl;
+Del(4);
+cout<<LengthO1();
+  PrintLL();
 
 	return 0;
 }
