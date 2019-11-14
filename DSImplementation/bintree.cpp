@@ -45,15 +45,28 @@ void insertnodeleft(Node *parent, Node *node)
     return;
 }
 
+void func(Node* node){
+    cout<<node->data<<" ";
+}
 
-void inorder(Node *temp)
-{
-    if (!temp)
-        return;
-    inorder(temp->left);
-    cout << temp->data << " ";
-    inorder(temp->right);
-    return;
+void inorderTraversal(Node* root){
+    if(root == nullptr) return;
+    inorderTraversal(root->left);
+    func(root);
+    inorderTraversal(root->right);
+}
+
+void preorderTraversal(Node* root){
+    if(root == nullptr) return;
+    func(root);
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
+}
+void postorderTraversal(Node* root){
+    if(root == nullptr) return;
+    postorderTraversal(root->left);
+    postorderTraversal(root->right);
+    func(root);
 }
 
 
@@ -112,9 +125,9 @@ int main()
 
    // deletenode(n1);
 
-    inorder(n);
+    inorderTraversal(n);
     cout<<endl;
     deletenode(n1);
-    inorder(n);
+    inorderTraversal(n);
     return 0;
 }
