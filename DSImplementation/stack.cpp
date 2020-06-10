@@ -96,9 +96,9 @@ void PrintLL(){
 	Node* t;
 		t = start;
 		while(t!=nullptr){
-		cout<<t->x<<endl;
+		cout<<t->x<<" ";
 		t = t->ptr;
-		}
+		}cout<<endl;
 
 }
 
@@ -133,14 +133,14 @@ void PrintStack(){
 
 
 int main(){
-//    Push(2);
-//    Push(3);
-//    Push(4);
-//    cout<<Top()<<endl;
-//    PrintStack();
-//    Pop();
-//    Pop();
-//    cout<<Top()<<endl;
+   Push(2);
+   Push(3);
+   Push(4);
+   cout<<Top()<<endl;
+   PrintStack();
+   Pop();
+   Pop();
+   cout<<Top()<<endl;
 
 	return 0;
 }

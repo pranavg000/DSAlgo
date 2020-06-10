@@ -23,12 +23,15 @@ int hashFunction2(int k){
 int hashMix(int i, int k){
     return (hashFunction1(k)+i*hashFunction2(k))%p;
 }
+int hashMix2(int i, int k){
+    return (hashFunction1(k)+i*i)%p;
+}
 
 bool Insert(int k){
     int index = hashFunction1(k);
     int c=1;
     while(HT[index]!=-1&&c<m){
-        index = hashMix(c,k);
+        index = hashMix2(c,k);
         c++;
     }
     if(HT[index]!=-1){
@@ -122,16 +125,16 @@ int main(){
     Insert(1);
     printHT();
     Insert(2);
-     printHT();
+    printHT();
     Insert(3);
-     printHT();
+    printHT();
     Insert(4);
-     printHT();
+    printHT();
     Search(1);
     Search(4);
     Search(5);
     Delete(4);
-     printHT();
+    printHT();
     Search(4);
 
 
