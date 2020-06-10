@@ -22,7 +22,7 @@ int findSet(int x){
 void unionSets(int x, int y){
 	int px = findSet(x);
 	int py = findSet(y);
-
+    if(px==py) return;
 	if(rank_[px]<rank_[py]){
 		parent[px]=py;
 	}
@@ -35,6 +35,63 @@ void unionSets(int x, int y){
 	}
 
 }
+
+
+
+
+
+
+vector<int> parent, rank_,size_;
+set<int> reps;
+void makeSet(int x){
+	parent[x]=x;
+	rank_[x]=0;
+	size_[x]=1;
+	reps.insert(x);
+}
+
+int findSet(int x){
+	if(x!=parent[x])
+		parent[x]=findSet(parent[x]);
+
+	return parent[x];
+}
+
+void unionSets(int x, int y){
+	int px = findSet(x);
+	int py = findSet(y);
+    if(px==py) return;
+	if(rank_[px]<rank_[py]){
+		parent[px]=py;
+		reps.erase(px);
+		size_[py]+=size_[px];
+	}
+	else if(rank_[py]<rank_[px]){
+		parent[py]=px;
+		reps.erase(py);
+		size_[px]+=size_[py];
+	}
+	else{
+		parent[py]=px;
+		rank_[px]++;
+		reps.erase(py);
+		size_[px]+=size_[py];
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
